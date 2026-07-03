@@ -1,0 +1,79 @@
+package servlet;
+
+import com.google.gson.Gson;
+import dao.ClienteDAO;
+import model.Cliente;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.util.List;
+
+@WebServlet("/clientes")
+public class ClienteServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private ClienteDAO dao = new ClienteDAO();
+    private Gson gson = new Gson();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            List<Cliente> lista = dao.listar();
+            resp.getWriter().write(gson.toJson(lista));
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            String nome = req.getParameter("nome");
+            String cpf = req.getParameter("cpf");
+            String email = req.getParameter("email");
+            Cliente c = new Cliente(nome, cpf, email);
+            dao.inserir(c);
+            resp.getWriter().write("{\"mensagem\":\"Cliente cadastrado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            String nome = req.getParameter("nome");
+            String cpf = req.getParameter("cpf");
+            String email = req.getParameter("email");
+            Cliente c = new Cliente(nome, cpf, email);
+            c.setId(id);
+            dao.atualizar(c);
+            resp.getWriter().write("{\"mensagem\":\"Cliente atualizado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            dao.deletar(id);
+            resp.getWriter().write("{\"mensagem\":\"Cliente deletado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+}
