@@ -1,0 +1,70 @@
+package servlet;
+
+import com.google.gson.Gson;
+import conection.Conexao;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.sql.*;
+
+@WebServlet("/cadastro")
+public class CadastroServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private Gson gson = new Gson();
+
+    // POST - realizar cadastro
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        String nome = req.getParameter("nome");
+        String cpf = req.getParameter("cpf");
+        String email = req.getParameter("email");
+        String senha = req.getParameter("senha");
+        String telefone = req.getParameter("telefone");
+
+        if (nome == null || email == null || senha == null ||
+            nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+            resp.setStatus(400);
+            resp.getWriter().write("{\"erro\":\"Nome, email e senha são obrigatórios!\"}");
+            return;
+        }
+
+        try (Connection conn = Conexao.conectar()) {
+            // Verifica se email já existe
+            String checkSql = "SELECT id FROM cliente WHERE email = ?";
+            PreparedStatement checkPs = conn.prepareStatement(checkSql);
+            checkPs.setString(1, email);
+            ResultSet checkRs = checkPs.executeQuery();
+
+            if (checkRs.next()) {
+                resp.setStatus(409);
+                resp.getWriter().write("{\"erro\":\"Email já cadastrado!\"}");
+                return;
+            }
+
+            // Insere o novo cliente
+            String sql = "INSERT INTO cliente (nome, cpf, email, senha, telefone) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, nome);
+            ps.setString(2, cpf);
+            ps.setString(3, email);
+            ps.setString(4, senha);
+            ps.setString(5, telefone);
+            ps.executeUpdate();
+
+            ResultSet keys = ps.getGeneratedKeys();
+            int id = 0;
+            if (keys.next()) id = keys.getInt(1);
+
+            resp.getWriter().write("{\"id\":" + id +
+                                   ",\"nome\":\"" + nome + "\"" +
+                                   ",\"email\":\"" + email + "\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+}

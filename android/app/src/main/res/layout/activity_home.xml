@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.na_navalha.viewmodel.AgendamentoViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#111111">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- HEADER -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boa noite,"
+                            android:textColor="#888888"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tvNomeCliente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cliente"
+                            android:textColor="#F5F5F0"
+                            android:textSize="24sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/ivNotificacao"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="#1E1E1E"
+                        android:padding="8dp"
+                        android:src="@android:drawable/ic_popup_reminder"/>
+
+                </LinearLayout>
+
+                <!-- BUSCA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#1E1E1E"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        app:tint="#888888"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buscar servicos ou barbeiros..."
+                        android:textColor="#555555"
+                        android:textSize="14sp"
+                        android:layout_marginStart="8dp"/>
+
+                </LinearLayout>
+
+                <!-- BANNER PROMOÇÃO -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:background="#1E0A0A"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PROMOCAO ESPECIAL"
+                        android:textColor="#C8102E"
+                        android:textSize="10sp"
+                        android:letterSpacing="0.2"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20% OFF na primeira barba"
+                        android:textColor="#F5F5F0"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Valido ate 31/05 - Novos clientes"
+                        android:textColor="#888888"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <Button
+                        android:id="@+id/btnAgendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Agendar agora"
+                        android:textColor="#F5F5F0"
+                        android:textSize="12sp"
+                        android:backgroundTint="#C8102E"
+                        android:stateListAnimator="@null"/>
+
+                </LinearLayout>
+
+                <!-- PRÓXIMO AGENDAMENTO -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Proximo agendamento"
+                        android:textColor="#F5F5F0"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvVerTodosAgendamentos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver todos"
+                        android:textColor="#C8102E"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+                <!-- CARD AGENDAMENTO -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="#1E1E1E"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="#C8102E"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AMN"
+                            android:textColor="#F5F5F0"
+                            android:textSize="9sp"/>
+
+                        <TextView
+                            android:id="@+id/tvHorario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="14:30"
+                            android:textColor="#F5F5F0"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvServico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Corte + Barba"
+                            android:textColor="#F5F5F0"
+                            android:textSize="14sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/tvBarbeiro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="com Rafael Lima"
+                            android:textColor="#888888"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confirmado"
+                        android:textColor="#5cb85c"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <!-- BOTÃO AGENDAR HORÁRIO -->
+                <Button
+                    android:id="@+id/btnAgendarHorario"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Agendar Horario"
+                    android:textColor="#F5F5F0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#C8102E"
+                    android:stateListAnimator="@null"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp"/>
+
+                <!-- SERVIÇOS POPULARES -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Servicos populares"
+                        android:textColor="#F5F5F0"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvVerTodosServicos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver todos"
+                        android:textColor="#C8102E"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+                <!-- GRID SERVIÇOS -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_columnWeight="1"
+                        android:background="#1E1E1E"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Corte" android:textColor="#C8102E" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Corte Masculino" android:textColor="#F5F5F0" android:textSize="13sp" android:textStyle="bold"/>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="R$ 40" android:textColor="#C8102E" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30 min" android:textColor="#555555" android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_columnWeight="1"
+                        android:background="#1E1E1E"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:layout_marginBottom="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Barba" android:textColor="#C8102E" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Barba" android:textColor="#F5F5F0" android:textSize="13sp" android:textStyle="bold"/>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="R$ 30" android:textColor="#C8102E" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="20 min" android:textColor="#555555" android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_columnWeight="1"
+                        android:background="#1E1E1E"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:layout_marginEnd="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Combo" android:textColor="#C8102E" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Corte + Barba" android:textColor="#F5F5F0" android:textSize="13sp" android:textStyle="bold"/>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="R$ 65" android:textColor="#C8102E" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="50 min" android:textColor="#555555" android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="90dp"
+                        android:layout_columnWeight="1"
+                        android:background="#1E1E1E"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Extra" android:textColor="#C8102E" android:textSize="16sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sobrancelha" android:textColor="#F5F5F0" android:textSize="13sp" android:textStyle="bold"/>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="R$ 20" android:textColor="#C8102E" android:textSize="12sp"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15 min" android:textColor="#555555" android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </GridLayout>
+
+                <!-- BARBEIROS EM DESTAQUE -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Barbeiros em destaque"
+                        android:textColor="#F5F5F0"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvVerTodosBarbeiros"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver todos"
+                        android:textColor="#C8102E"
+                        android:textSize="13sp"/>
+
+                </LinearLayout>
+
+                <!-- BARBEIRO 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="#1E1E1E"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="44dp" android:layout_height="44dp" android:background="#C8102E" android:text="R" android:textColor="#F5F5F0" android:textSize="18sp" android:textStyle="bold" android:gravity="center" android:layout_marginEnd="12dp"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rafael Lima" android:textColor="#F5F5F0" android:textSize="14sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fade e Texturizado" android:textColor="#888888" android:textSize="12sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.9 (412)" android:textColor="#888888" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <Button android:layout_width="80dp" android:layout_height="36dp" android:text="Agendar" android:textColor="#F5F5F0" android:textSize="11sp" android:backgroundTint="#C8102E" android:stateListAnimator="@null"/>
+                </LinearLayout>
+
+                <!-- BARBEIRO 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="#1E1E1E"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="44dp" android:layout_height="44dp" android:background="#003087" android:text="L" android:textColor="#F5F5F0" android:textSize="18sp" android:textStyle="bold" android:gravity="center" android:layout_marginEnd="12dp"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lucas Mendes" android:textColor="#F5F5F0" android:textSize="14sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Navalha e Barba" android:textColor="#888888" android:textSize="12sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.8 (245)" android:textColor="#888888" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <Button android:layout_width="80dp" android:layout_height="36dp" android:text="Agendar" android:textColor="#F5F5F0" android:textSize="11sp" android:backgroundTint="#C8102E" android:stateListAnimator="@null"/>
+                </LinearLayout>
+
+                <!-- BARBEIRO 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="#1E1E1E"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp">
+                    <TextView android:layout_width="44dp" android:layout_height="44dp" android:background="#2A5C2A" android:text="D" android:textColor="#F5F5F0" android:textSize="18sp" android:textStyle="bold" android:gravity="center" android:layout_marginEnd="12dp"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diego Santos" android:textColor="#F5F5F0" android:textSize="14sp" android:textStyle="bold"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Corte Classico" android:textColor="#888888" android:textSize="12sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4.7 (189)" android:textColor="#888888" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <Button android:layout_width="80dp" android:layout_height="36dp" android:text="Ocupado" android:textColor="#888888" android:textSize="11sp" android:backgroundTint="#2A2A2A" android:stateListAnimator="@null"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- BOTTOM NAV -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#1a1a1a"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/btnNavInicio"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Casa" android:textColor="#C8102E" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Inicio" android:textColor="#C8102E" android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnNavServicos"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Srv" android:textColor="#555555" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Servicos" android:textColor="#555555" android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnNavHorarios"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hrs" android:textColor="#555555" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Horarios" android:textColor="#555555" android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnNavBarbeiros"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Brb" android:textColor="#555555" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Barbeiros" android:textColor="#555555" android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnNavPerfil"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prf" android:textColor="#555555" android:textSize="14sp" android:textStyle="bold"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Perfil" android:textColor="#555555" android:textSize="10sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.na_navalha.viewmodel.LoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#111111">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- LOGO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NANAVALHA BARBERSHOP"
+                android:textColor="#C8102E"
+                android:textSize="11sp"
+                android:letterSpacing="0.2"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- TITULO -->
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bem-vindo de volta"
+                android:textColor="#F5F5F0"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="32dp"/>
+
+            <!-- TOGGLE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="#1E1E1E"
+                android:orientation="horizontal"
+                android:layout_marginBottom="28dp">
+
+                <Button
+                    android:id="@+id/btnToggleEntrar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Entrar"
+                    android:textColor="#F5F5F0"
+                    android:textSize="15sp"
+                    android:backgroundTint="#2A2A2A"
+                    android:stateListAnimator="@null"/>
+
+                <Button
+                    android:id="@+id/btnToggleCadastrar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Cadastrar"
+                    android:textColor="#888888"
+                    android:textSize="15sp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:stateListAnimator="@null"/>
+
+            </LinearLayout>
+
+            <!-- CAMPOS EXTRAS CADASTRO -->
+            <LinearLayout
+                android:id="@+id/layoutCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome completo"
+                    android:textColor="#F5F5F0"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="Seu nome"
+                    android:textColorHint="#555555"
+                    android:textColor="#F5F5F0"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telefone"
+                    android:textColor="#F5F5F0"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etTelefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="(00) 00000-0000"
+                    android:textColorHint="#555555"
+                    android:textColor="#F5F5F0"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:inputType="phone"
+                    android:layout_marginBottom="20dp"/>
+
+            </LinearLayout>
+
+            <!-- EMAIL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail"
+                android:textColor="#F5F5F0"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="seu@email.com"
+                android:textColorHint="#555555"
+                android:textColor="#F5F5F0"
+                android:background="@drawable/input_background"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- SENHA -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senha"
+                android:textColor="#F5F5F0"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/etSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="••••••••"
+                    android:textColorHint="#555555"
+                    android:textColor="#F5F5F0"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="56dp"
+                    android:inputType="textPassword"/>
+
+                <ImageView
+                    android:id="@+id/ivMostrarSenha"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:src="@android:drawable/ic_menu_view"
+                    android:tint="#888888"/>
+
+            </FrameLayout>
+
+            <!-- ESQUECI SENHA -->
+            <TextView
+                android:id="@+id/tvEsqueciSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Esqueci minha senha"
+                android:textColor="#C8102E"
+                android:textSize="13sp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="40dp"/>
+
+            <!-- BOTÃO PRINCIPAL -->
+            <Button
+                android:id="@+id/btnEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Entrar"
+                android:textColor="#F5F5F0"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="#C8102E"
+                android:stateListAnimator="@null"/>
+
+            <!-- RODAPÉ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NANAVALHA BARBERSHOP"
+                android:textColor="#333333"
+                android:textSize="10sp"
+                android:letterSpacing="0.2"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

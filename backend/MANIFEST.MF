@@ -1,0 +1,77 @@
+package servlet;
+
+import com.google.gson.Gson;
+import dao.BarbeiroDAO;
+import model.Barbeiro;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.util.List;
+
+@WebServlet("/barbeiros")
+public class BarbeiroServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private BarbeiroDAO dao = new BarbeiroDAO();
+    private Gson gson = new Gson();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            List<Barbeiro> lista = dao.listar();
+            resp.getWriter().write(gson.toJson(lista));
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            String nome = req.getParameter("nome");
+            String especialidade = req.getParameter("especialidade");
+            Barbeiro b = new Barbeiro(nome, especialidade);
+            dao.inserir(b);
+            resp.getWriter().write("{\"mensagem\":\"Barbeiro cadastrado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            String nome = req.getParameter("nome");
+            String especialidade = req.getParameter("especialidade");
+            Barbeiro b = new Barbeiro(nome, especialidade);
+            b.setId(id);
+            dao.atualizar(b);
+            resp.getWriter().write("{\"mensagem\":\"Barbeiro atualizado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            dao.deletar(id);
+            resp.getWriter().write("{\"mensagem\":\"Barbeiro deletado!\"}");
+        } catch (Exception e) {
+            resp.setStatus(500);
+            resp.getWriter().write("{\"erro\":\"" + e.getMessage() + "\"}");
+        }
+    }
+}
