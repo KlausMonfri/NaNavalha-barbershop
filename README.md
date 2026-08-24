@@ -1,4 +1,4 @@
-# NaNavalha BarberShop 💈
+# NaNavalha BarberShop 
 
 Sistema de agendamento de serviços para barbearia, desenvolvido como projeto acadêmico.
 
